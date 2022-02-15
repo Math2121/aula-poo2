@@ -4,6 +4,7 @@ import { Container } from './styles'
 interface INewTransactionModalProps {
   isOpenProp: boolean;
   onRequestCloseProp: () => void;
+
 }
 
 export function NewTransactionModal({ isOpenProp, onRequestCloseProp }: INewTransactionModalProps) {
