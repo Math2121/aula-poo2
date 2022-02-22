@@ -66,4 +66,11 @@ export const GlobalStyle = createGlobalStyle`
   position:relative;
   border-radius:0.24rem;
 }
+.react-modal-close {
+    position: absolute;
+    right: 1.5rem;
+    border: 0;
+    top: 1.5rem;
+    background-color: transparent !important;
+  }
 `;
