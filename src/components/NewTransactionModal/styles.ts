@@ -47,17 +47,29 @@ export const TransactionTypeContainer = styled.div`
   gap: 0.5rem;
   margin: 1rem 0;
 `;
-export const ButtonRadio = styled.button`
+
+interface IButtonRadioProps {
+  isActive: boolean;
+  activeColor: "green" | "red";
+}
+const colorsButtonRadio = {
+  green: "#33cc95",
+  red: "#e52e4d",
+};
+export const ButtonRadio = styled.button<IButtonRadioProps>`
   height: 4rem;
   border: 1px solid #d7d7d7;
   border-radius: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
-  transition: all .3s ease;
+  background: ${({ isActive, activeColor }) =>
+    isActive
+      ? colorsButtonRadio[activeColor]
+      : 'transparent'};
+  transition: all 0.3s ease;
   &:hover {
-    border-color: ${darken(0.35,'#d7d7d7')};
+    border-color: ${darken(0.35, "#d7d7d7")};
   }
 `;
 

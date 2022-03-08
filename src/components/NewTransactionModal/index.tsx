@@ -19,7 +19,18 @@ export function NewTransactionModal({
   isOpenProp,
   onRequestCloseProp,
 }: INewTransactionModalProps) {
-  const [type, setType] = useState('');
+  const [type, setType] = useState("deposit");
+  const [title, setTitle] = useState("");
+  const [value, setValue] = useState<number|string>();
+  const [category, setCategory] = useState("");
+
+  const handleCreateNewTransaction = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setTitle("");
+    setValue(0);
+    setCategory("");
+    setType('deposit')
+  };
   return (
     <Modal
       // isOpen={isNewTransactionModalOpen}
@@ -29,24 +40,47 @@ export function NewTransactionModal({
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
     >
-      <Container>
+      <Container onSubmit={handleCreateNewTransaction}>
         <button className="react-modal-close" onClick={onRequestCloseProp}>
-          <img src={CloseIcon} alt="Iconde de fechar" />
+          <img src={CloseIcon} alt="Icon de de fechar " />
         </button>
 
         <h2>Cadastrar transação</h2>
-        <input placeholder="Titulo" />
+        <input
+          placeholder="Título"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
 
-        <input placeholder="Valor" />
+        <input
+          placeholder="Valor"
+          onChange={(e) => setValue(+e.target.value)}
+          value={value}
 
-        <input placeholder="Categoria" />
+        />
+
+        <input
+          placeholder="Categoria"
+          onChange={(e) => setCategory(e.target.value)}
+          value={category}
+        />
         <TransactionTypeContainer>
-          <ButtonRadio type="button" onClick={()=>setType('deposit')}>
+          <ButtonRadio
+            type="button"
+            onClick={() => setType("deposit")}
+            isActive={type === "deposit"}
+            activeColor="green"
+          >
             <ImgModal src={IncomeIcon} alt="" />
             <TextButton>Entrada</TextButton>
           </ButtonRadio>
 
-          <ButtonRadio  type="button" onClick={()=>setType('withdraw')}>
+          <ButtonRadio
+            type="button"
+            onClick={() => setType("withdraw")}
+            isActive={type === "withdraw"}
+            activeColor="red"
+          >
             <ImgModal src={OutcomeIcon} alt="" />
             <TextButton>Saída</TextButton>
           </ButtonRadio>
